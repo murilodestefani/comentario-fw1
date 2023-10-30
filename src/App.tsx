@@ -10,7 +10,10 @@ import {
   Textarea,
   Tooltip,
 } from "@nextui-org/react";
-import { ChatCircle, PaperPlaneRight } from "@phosphor-icons/react";
+import {
+  ChatCircle,
+  PaperPlaneRight,
+} from "@phosphor-icons/react";
 import { useState, useEffect } from "react";
 
 export default function App() {
@@ -46,61 +49,64 @@ export default function App() {
   }, []);
 
   return (
-    <section className="mx-4 flex flex-col justify-center gap-8">
-      <Input
-        type="text"
-        label="Autor"
-        placeholder="Digite seu nome"
-        isRequired
-        value={novoComentario.autor}
-        onChange={(e) =>
-          setNovoComentario({ ...novoComentario, autor: e.target.value })
-        }
-      />
+    <section className="container mx-auto flex flex-col justify-center px-4 md:px-0 lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
+      
 
-      <Textarea
-        label="Comentario"
-        labelPlacement="outside"
-        placeholder="Digite seu comentário aqui"
-        isRequired
-        value={novoComentario.texto}
-        onChange={(e) =>
-          setNovoComentario({ ...novoComentario, texto: e.target.value })
-        }
-      />
+      <fieldset className="flex flex-col gap-8">
+        <Input
+          type="text"
+          label="Autor"
+          placeholder="Digite seu nome"
+          isRequired
+          value={novoComentario.autor}
+          onChange={(e) =>
+            setNovoComentario({ ...novoComentario, autor: e.target.value })
+          }
+        />
 
-      <Tooltip content="Clique para publicar seu comentário">
-        <Button
-          color="primary"
-          endContent={<PaperPlaneRight weight="fill" />}
-          onClick={adicionarComentario}
-        >
-          Publicar
-        </Button>
-      </Tooltip>
+        <Textarea
+          label="Comentario"
+          labelPlacement="outside"
+          placeholder="Digite seu comentário aqui"
+          isRequired
+          value={novoComentario.texto}
+          onChange={(e) =>
+            setNovoComentario({ ...novoComentario, texto: e.target.value })
+          }
+        />
 
+        <Tooltip content="Clique para publicar seu comentário">
+          <Button
+            className="bg-gradient-to-tr from-sky-300 to-blue-800"
+            endContent={<PaperPlaneRight weight="fill" />}
+            onClick={adicionarComentario}
+          >
+            Publicar
+          </Button>
+        </Tooltip>
+      </fieldset>
       <Chip
-        startContent={<ChatCircle size={18} />}
+        className="mx-auto mt-8"
+        startContent={<ChatCircle size={18} weight="duotone" />}
         variant="faded"
-        color="success"
+        color="default"
       >
         {comentarios.length} Comentários
       </Chip>
-
-      <ul>
+      <ul className="mx-auto flex flex-col items-center gap-4">
         {comentarios.map((comentario, index) => (
-          <li key={index}>
-            <Card className="max-w-[340px]">
-              <CardHeader className="justify-between">
+          <li key={index} className="container">
+            <Card className="min-w-full">
+              <CardHeader>
                 <div className="flex gap-5">
                   <Avatar
                     isBordered
                     radius="full"
                     size="md"
-                    src="https://source.unsplash.com/random/"
+                    src={`https://source.unsplash.com/random/${index}`}
                   />
                   <div className="flex flex-col items-start justify-center gap-1">
-                    <h4 className="text-small font-semibold leading-none text-default-600">
+                    <h4 className="text-small font-semibold capitalize leading-none text-default-600">
                       {comentario.autor}
                     </h4>
                     <h5 className="text-small tracking-tight text-default-400">
