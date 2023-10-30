@@ -9,7 +9,7 @@ import Nav from "./Nav.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <NextUIProvider className="min-h-screen bg-background text-foreground dark flex flex-col justify-between">
+    <NextUIProvider className="bg-background text-foreground dark flex flex-col justify-between">
       <Nav />
       <Header />
       <App />
