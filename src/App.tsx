@@ -10,17 +10,21 @@ import {
   Textarea,
   Tooltip,
 } from "@nextui-org/react";
-import {
-  ChatCircle,
-  PaperPlaneRight,
-} from "@phosphor-icons/react";
+import { ChatCircle, PaperPlaneRight } from "@phosphor-icons/react";
 import { useState, useEffect } from "react";
 
+interface Comentario {
+  autor: string;
+  texto: string;
+  data: string;
+}
+
 export default function App() {
-  const [comentarios, setComentarios] = useState([]);
-  const [novoComentario, setNovoComentario] = useState({
+  const [comentarios, setComentarios] = useState<Comentario[]>([]);
+  const [novoComentario, setNovoComentario] = useState<Comentario>({
     autor: "",
     texto: "",
+    data: "",
   });
 
   const adicionarComentario = () => {
@@ -36,7 +40,7 @@ export default function App() {
       setComentarios(novoComentarioLista);
       setNovoComentario({ autor: "", texto: "" });
 
-      localStorage.setItem("register", JSON.stringify(comentarios));
+      localStorage.setItem("register", JSON.stringify(novoComentarioLista));
     }
   };
 
@@ -50,8 +54,6 @@ export default function App() {
 
   return (
     <section className="container mx-auto flex flex-col justify-center px-4 md:px-0 lg:max-w-screen-lg xl:max-w-screen-xl 2xl:max-w-screen-2xl">
-      
-
       <fieldset className="flex flex-col gap-8">
         <Input
           type="text"
@@ -86,7 +88,7 @@ export default function App() {
         </Tooltip>
       </fieldset>
       <Chip
-        className="mx-auto mt-8"
+        className="mx-auto my-8"
         startContent={<ChatCircle size={18} weight="duotone" />}
         variant="faded"
         color="default"
@@ -120,7 +122,7 @@ export default function App() {
               </CardBody>
               <CardFooter className="gap-3">
                 <div className="flex gap-1">
-                  <p className=" text-small text-default-400">
+                  <p className="text-small text-default-400">
                     {comentario.data}
                   </p>
                 </div>
