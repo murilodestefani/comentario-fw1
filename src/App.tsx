@@ -19,12 +19,16 @@ interface Comentario {
   data: string;
 }
 
+interface NovoComentario {
+  autor: string;
+  texto: string;
+}
+
 export default function App() {
   const [comentarios, setComentarios] = useState<Comentario[]>([]);
-  const [novoComentario, setNovoComentario] = useState<Comentario>({
+  const [novoComentario, setNovoComentario] = useState<NovoComentario>({
     autor: "",
     texto: "",
-    data: "",
   });
 
   const adicionarComentario = () => {
@@ -79,7 +83,7 @@ export default function App() {
 
         <Tooltip content="Clique para publicar seu comentário">
           <Button
-            className="bg-gradient-to-tr from-sky-300 to-blue-800"
+            className="bg-custom-gradient"
             endContent={<PaperPlaneRight weight="fill" />}
             onClick={adicionarComentario}
           >
